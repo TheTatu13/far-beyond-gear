@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "name": "First Blood",
+    "description": "Ai creat contul și te-ai logat prima oară! (-5%)",
+    "discount_percentage": 5
+  },
+  {
+    "id": 2,
+    "name": "Window Shopper",
+    "description": "Ai adăugat primul produs în coș. E un început! (-5%)",
+    "discount_percentage": 5
+  },
+  {
+    "id": 3,
+    "name": "Social Butterfly",
+    "description": "Ai dat share primului produs către prieteni. (-5%)",
+    "discount_percentage": 5
+  },
+  {
+    "id": 4,
+    "name": "Gear Head",
+    "description": "Ai vizitat de 5 ori secțiunea de Branduri. Știi ce cauți! (-10%)",
+    "discount_percentage": 10
+  },
+  {
+    "id": 5,
+    "name": "Reviewer",
+    "description": "Ne-ai ajutat comunitatea lăsând primul tău review. Multumim! (-10%)",
+    "discount_percentage": 10
+  },
+  {
+    "id": 6,
+    "name": "Collector",
+    "description": "Ai cumpărat echipament din 3 categorii diferite. (-10%)",
+    "discount_percentage": 10
+  },
+  {
+    "id": 7,
+    "name": "Guitar Hero",
+    "description": "Ai adăugat prima chitară la colecția ta. Let it rock! (-10%)",
+    "discount_percentage": 10
+  },
+  {
+    "id": 8,
+    "name": "Keys Master",
+    "description": "Te-ai axat pe clape. Synth-urile sunt prietenii tăi. (-10%)",
+    "discount_percentage": 10
+  },
+  {
+    "id": 9,
+    "name": "Amped Up",
+    "description": "Ai achiziționat primul tău amplificator serios. Vecinii vor ști! (-15%)",
+    "discount_percentage": 15
+  },
+  {
+    "id": 10,
+    "name": "Studio Rat",
+    "description": "Echipamentele de studio se adună în coșul tău... (-15%)",
+    "discount_percentage": 15
+  },
+  {
+    "id": 11,
+    "name": "Loyal Customer",
+    "description": "Ai petrecut 1 an pe platforma noastră! (-15%)",
+    "discount_percentage": 15
+  },
+  {
+    "id": 12,
+    "name": "Big Spender",
+    "description": "Ai plasat prima ta comandă de peste 5.000 RON. Woohoo! (-20%)",
+    "discount_percentage": 20
+  },
+  {
+    "id": 13,
+    "name": "Band Manager",
+    "description": "Ai adus în echipă încă 3 prieteni folosind link-ul de referință. (-20%)",
+    "discount_percentage": 20
+  },
+  {
+    "id": 14,
+    "name": "GabeN's Blessing",
+    "description": "Ai strans 10.000 XP in Gamification System! Lord of the Gear! (-25%)",
+    "discount_percentage": 25
+  },
+  {
+    "id": 15,
+    "name": "Platinum Ear",
+    "description": "Ai deblocat absolut toate categoriile posibile de pe Far Beyond Gear! (-30%)",
+    "discount_percentage": 30
+  }
+]

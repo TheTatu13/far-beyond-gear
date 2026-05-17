@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confirmare Comandă — Far Beyond Gear</title>
+</head>
+<body style="margin:0;padding:0;background:#0b0f17;font-family:'Segoe UI',Arial,sans-serif;color:#c7d5e0;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#0b0f17;padding:40px 20px;">
+  <tr><td align="center">
+    <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
+
+      <!-- Header -->
+      <tr>
+        <td style="background:linear-gradient(135deg,#1a0800,#0d0503);border-radius:12px 12px 0 0;padding:36px 40px;text-align:center;border-bottom:3px solid #ff6030;">
+          <div style="font-size:2.2rem;font-weight:900;color:#ff6030;letter-spacing:0.12em;font-family:Georgia,serif;">FAR BEYOND</div>
+          <div style="font-size:2.2rem;font-weight:900;color:#fff;letter-spacing:0.12em;font-family:Georgia,serif;">GEAR</div>
+          <div style="margin-top:8px;font-size:0.75rem;color:rgba(255,150,80,0.6);letter-spacing:0.3em;text-transform:uppercase;">Foc · Metal · Sunet</div>
+        </td>
+      </tr>
+
+      <!-- Body -->
+      <tr>
+        <td style="background:#111827;padding:36px 40px;">
+          <h1 style="color:#fff;font-size:1.4rem;margin:0 0 8px;">Comanda ta a fost confirmată! 🤘</h1>
+          <p style="color:#8ab0c0;font-size:0.9rem;margin:0 0 28px;">Bună, <strong style="color:#fff;">{{ customer_name }}</strong>! Comanda ta este în procesare.</p>
+
+          <!-- Order info -->
+          <table width="100%" cellpadding="0" cellspacing="0" style="background:#0f172a;border-radius:8px;padding:20px;margin-bottom:24px;border:1px solid rgba(255,96,48,0.12);">
+            <tr>
+              <td style="padding:8px 0;color:#8ab0c0;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.06em;">Nr. Comandă</td>
+              <td style="padding:8px 0;color:#ff7040;font-weight:700;text-align:right;">{{ order_number }}</td>
+            </tr>
+            <tr>
+              <td style="padding:8px 0;color:#8ab0c0;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.06em;">AWB / Tracking</td>
+              <td style="padding:8px 0;color:#fff;font-weight:700;text-align:right;font-family:monospace;font-size:1rem;">{{ awb_number }}</td>
+            </tr>
+            <tr>
+              <td style="padding:8px 0;color:#8ab0c0;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.06em;">Curier</td>
+              <td style="padding:8px 0;color:#c0d0e0;text-align:right;">{{ courier }}</td>
+            </tr>
+            <tr>
+              <td style="padding:8px 0;color:#8ab0c0;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.06em;">Data</td>
+              <td style="padding:8px 0;color:#c0d0e0;text-align:right;">{{ order_date }}</td>
+            </tr>
+            <tr>
+              <td style="padding:8px 0;color:#8ab0c0;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.06em;">Metodă plată</td>
+              <td style="padding:8px 0;color:#c0d0e0;text-align:right;">{{ payment_method }}</td>
+            </tr>
+          </table>
+
+          <!-- Products -->
+          <h3 style="color:#ff8050;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;margin:0 0 12px;">Produse comandate</h3>
+          <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
+            {% for item in items %}
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+              <td style="padding:10px 0;color:#c0d0e0;font-size:0.88rem;">{{ item.name }}</td>
+              <td style="padding:10px 0;color:#8ab0c0;font-size:0.85rem;text-align:center;">×{{ item.qty }}</td>
+              <td style="padding:10px 0;color:#ff9040;font-weight:700;text-align:right;">{{ item.total }} €</td>
+            </tr>
+            {% endfor %}
+            {% if discount_amount %}
+            <tr>
+              <td colspan="2" style="padding:10px 0;color:#34d399;font-size:0.85rem;">Reducere aplicată</td>
+              <td style="padding:10px 0;color:#34d399;font-weight:700;text-align:right;">-{{ discount_amount }} €</td>
+            </tr>
+            {% endif %}
+            <tr style="border-top:2px solid rgba(255,96,48,0.3);">
+              <td colspan="2" style="padding:14px 0;color:#fff;font-weight:700;font-size:1rem;">TOTAL</td>
+              <td style="padding:14px 0;color:#ff6030;font-weight:800;font-size:1.1rem;text-align:right;">{{ total_paid }} €</td>
+            </tr>
+          </table>
+
+          <!-- Shipping address -->
+          <table width="100%" cellpadding="0" cellspacing="0" style="background:#0f172a;border-radius:8px;padding:20px;margin-bottom:24px;border:1px solid rgba(255,255,255,0.05);">
+            <tr><td>
+              <div style="color:#8ab0c0;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">Adresă de livrare</div>
+              <div style="color:#c0d0e0;font-size:0.9rem;line-height:1.6;">
+                {{ customer_name }}<br>
+                {{ address }}<br>
+                {{ city }}, {{ county }} {{ zip_code }}<br>
+                📞 {{ phone }}
+              </div>
+            </td></tr>
+          </table>
+
+          <p style="color:#8ab0c0;font-size:0.82rem;line-height:1.6;margin:0 0 24px;">
+            Coletul tău va fi preluat de <strong style="color:#fff;">{{ courier }}</strong> în 24-48h.<br>
+            Urmărește coletul folosind AWB-ul: <strong style="color:#ff7040;font-family:monospace;">{{ awb_number }}</strong>
+          </p>
+        </td>
+      </tr>
+
+      <!-- Footer -->
+      <tr>
+        <td style="background:#0d0503;border-radius:0 0 12px 12px;padding:24px 40px;text-align:center;border-top:1px solid rgba(255,96,48,0.15);">
+          <p style="color:rgba(255,150,80,0.4);font-size:0.75rem;margin:0;">
+            Far Beyond Gear · Echipamente pentru profesioniști<br>
+            Răspunde la acest email pentru asistență: support@farbeyondgear.ro
+          </p>
+        </td>
+      </tr>
+
+    </table>
+  </td></tr>
+</table>
+</body>
+</html>
