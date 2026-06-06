@@ -1,0 +1,13 @@
+[
+  {"model": "catalog.brand", "pk": 1, "fields": {"name": "ENGL"}},
+  {"model": "catalog.brand", "pk": 2, "fields": {"name": "Marshall"}},
+
+  {"model": "catalog.category", "pk": 1, "fields": {"name": "Amps"}},
+  {"model": "catalog.category", "pk": 2, "fields": {"name": "Cabs"}},
+
+  {"model": "catalog.product", "pk": 1,
+   "fields": {"name": "Fireball 25", "brand": 1, "price": "4999.00", "stock": 5, "categories": [1]}},
+
+  {"model": "catalog.product", "pk": 2,
+   "fields": {"name": "DSL20HR", "brand": 2, "price": "2999.00", "stock": 8, "categories": [1,2]}}
+]
