@@ -115,7 +115,7 @@ export default function UserProfile() {
 
                 <div className={styles.header}>
                     <img
-                        src={`https://ui-avatars.com/api/?name=${username}&background=2a475e&color=66c0f4&size=120`}
+                        src={`https://ui-avatars.com/api/?name=${username}&background=ff6030&color=ffffff&size=120&bold=true`}
                         alt={`${username}'s avatar`}
                         className={styles.avatar}
                     />
@@ -135,8 +135,8 @@ export default function UserProfile() {
 
                         <div className={styles.xpSection}>
                             <div className={styles.xpLabels}>
-                                <span>Current XP: {xp}</span>
-                                <span>Next Level: {next_level_progress}%</span>
+                                <span>XP curent: {xp}</span>
+                                <span>Nivel următor: {next_level_progress}%</span>
                             </div>
                             <div className={styles.xpBarContainer}>
                                 <div
@@ -150,7 +150,7 @@ export default function UserProfile() {
 
                 <div className={styles.statsRow}>
                     <div className={styles.statItem} style={{ width: '100%', alignItems: 'center', textAlign: 'center' }}>
-                        <span className={styles.statLabel}>Total XP Earned</span>
+                        <span className={styles.statLabel}>Total XP Acumulat</span>
                         <span className={styles.statValue} style={{ fontSize: '32px' }}>{xp}</span>
                     </div>
                 </div>
@@ -192,7 +192,7 @@ export default function UserProfile() {
 
                                         <div className={styles.orderDetailsGrid}>
                                             <div className={styles.orderDetailCol}>
-                                                <span className={styles.detailLabel}>Formular de comandă</span>
+                                                <span className={styles.detailLabel}>Data comenzii</span>
                                                 <span className={styles.detailValue}>{orderDate}</span>
                                             </div>
                                             <div className={styles.orderDetailCol}>
@@ -243,7 +243,7 @@ export default function UserProfile() {
                                     >
                                         <div className={styles.achievementWrapper}>
                                             <img
-                                                src={ach.icon_url || `https://ui-avatars.com/api/?name=${ach.name ? ach.name.substring(0, 1) : '?'}&background=${isUnlocked ? '66c0f4' : '2a475e'}&color=fff&size=64&bold=true`}
+                                                src={ach.icon_url || `https://ui-avatars.com/api/?name=${ach.name ? ach.name.substring(0, 1) : '?'}&background=${isUnlocked ? 'ff6030' : '2a1008'}&color=fff&size=64&bold=true`}
                                                 alt={ach.name}
                                                 className={styles.achievementIcon}
                                             />
@@ -258,7 +258,7 @@ export default function UserProfile() {
                                     {/* Custom Steam-style Tooltip */}
                                     <div className={`${styles.achievementTooltip} ${!isUnlocked ? styles.locked : ''}`}>
                                         <img
-                                            src={ach.icon_url || `https://ui-avatars.com/api/?name=${ach.name ? ach.name.substring(0, 1) : '?'}&background=${isUnlocked ? '66c0f4' : '2a475e'}&color=fff&size=64&bold=true`}
+                                            src={ach.icon_url || `https://ui-avatars.com/api/?name=${ach.name ? ach.name.substring(0, 1) : '?'}&background=${isUnlocked ? 'ff6030' : '2a1008'}&color=fff&size=64&bold=true`}
                                             alt={ach.name}
                                             className={styles.tooltipIcon}
                                         />

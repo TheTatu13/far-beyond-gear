@@ -19,6 +19,18 @@ export default function Layout({ children }) {
   }, []);
 
   const [showScroll, setShowScroll] = useState(false);
+  const [isLight, setIsLight] = useState(() => localStorage.getItem("theme") === "light");
+
+  useEffect(() => {
+    if (isLight) {
+      document.documentElement.classList.add("light-theme");
+      localStorage.setItem("theme", "light");
+    } else {
+      document.documentElement.classList.remove("light-theme");
+      localStorage.setItem("theme", "dark");
+    }
+  }, [isLight]);
+
   const [showFeedback, setShowFeedback] = useState(false);
   const [fbRating, setFbRating] = useState(5);
   const [fbHover, setFbHover] = useState(0);
@@ -174,7 +186,14 @@ export default function Layout({ children }) {
               )}
 
             </ul>
-            <NavLink to="/cart" className="btn cart-button ms-lg-3">
+            <button
+              className="theme-toggle ms-lg-2"
+              onClick={() => setIsLight(v => !v)}
+              title={isLight ? "Comută la Dark" : "Comută la Light"}
+            >
+              <i className={`bi ${isLight ? "bi-moon-stars-fill" : "bi-sun-fill"}`}></i>
+            </button>
+            <NavLink to="/cart" className="btn cart-button ms-2">
               🛒 Coș ({cartCount})
             </NavLink>
           </div>
