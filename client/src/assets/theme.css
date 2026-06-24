@@ -41,8 +41,8 @@ body {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 .animate-fade-in {
@@ -578,15 +578,24 @@ a:hover {
 .category-pill span { color: var(--text-muted); }
 
 /* ── Cart / table ────────────────────────────────────────────────── */
-.table-cart { color: var(--text); }
+.table-cart {
+  color: var(--text);
+  --bs-table-bg: transparent;
+  --bs-table-striped-bg: transparent;
+  --bs-table-hover-bg: rgba(255, 80, 20, 0.05);
+  --bs-table-border-color: rgba(255, 100, 30, 0.08);
+  --bs-table-color: var(--text);
+}
 .table-cart thead th {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--text-muted);
   border-color: rgba(255, 100, 30, 0.08);
+  background: transparent;
 }
-.table-cart tbody td { border-color: rgba(255, 100, 30, 0.04); }
-.table { color: var(--text); }
+.table-cart tbody tr { background: transparent !important; }
+.table-cart tbody td { border-color: rgba(255, 100, 30, 0.04); background: transparent; }
+.table { color: var(--text); --bs-table-bg: transparent; }
 
 .qty-control {
   display: inline-flex;

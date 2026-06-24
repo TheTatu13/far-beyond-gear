@@ -8,6 +8,7 @@ import Categories from "./pages/Categories.jsx";
 import Brands from "./pages/Brands.jsx";
 import BrandDetails from "./pages/BrandDetails.jsx";
 import ArtistDetails from "./pages/ArtistDetails.jsx";
+import Artists from "./pages/Artists.jsx";
 import ProductDetails from "./pages/ProductDetails.jsx";
 import Cart from "./pages/Cart.jsx";
 import Checkout from "./pages/Checkout.jsx";
@@ -50,6 +51,7 @@ export default function App() {
         <Route path="/categories" element={<Categories />} />
         <Route path="/brands" element={<Brands />} />
         <Route path="/brands/:id" element={<BrandDetails />} />
+        <Route path="/artists" element={<Artists />} />
         <Route path="/artist/:id" element={<ArtistDetails />} />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/cart" element={<Cart />} />

@@ -1,5 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { getCartCount, subscribeCart, unsubscribeCart } from "../lib/cart.js";
 import { useAuth } from "../context/AuthContext.jsx";
 import { grantAchievement } from "../lib/api.js";
@@ -18,6 +19,26 @@ export default function Layout({ children }) {
   }, []);
 
   const [showScroll, setShowScroll] = useState(false);
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [fbRating, setFbRating] = useState(5);
+  const [fbHover, setFbHover] = useState(0);
+  const [fbMessage, setFbMessage] = useState("");
+  const [fbName, setFbName] = useState(user?.username || "");
+  const [fbSending, setFbSending] = useState(false);
+
+  const handleFeedbackSubmit = (e) => {
+    e.preventDefault();
+    if (!fbMessage.trim()) { toast.error("Te rugăm să scrii un mesaj."); return; }
+    setFbSending(true);
+    setTimeout(() => {
+      setFbSending(false);
+      setShowFeedback(false);
+      setFbMessage("");
+      setFbRating(5);
+      toast.success("Mulțumim pentru feedback! Îl apreciem enorm. 🎸", { theme: "dark", autoClose: 4000 });
+      grantAchievement("Social Butterfly", token);
+    }, 900);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -193,10 +214,13 @@ export default function Layout({ children }) {
                 >
                   <i className="bi bi-share me-2"></i> Share
                 </button>
-                <button className="btn btn-outline-light rounded-pill px-4 fw-medium shadow-sm border-2 opacity-75">
+                <a
+                  href="mailto:contact@farbeyondgear.ro?subject=Mesaj Far Beyond Gear"
+                  className="btn btn-outline-light rounded-pill px-4 fw-medium shadow-sm border-2 opacity-75"
+                >
                   <i className="bi bi-envelope me-2"></i> Email
-                </button>
-                <button className="btn btn-primary rounded-pill px-4 fw-bold shadow-sm">
+                </a>
+                <button className="btn btn-primary rounded-pill px-4 fw-bold shadow-sm" onClick={() => setShowFeedback(true)}>
                   <i className="bi bi-megaphone me-2"></i> Trimite feedback-ul tau
                 </button>
               </div>
@@ -295,6 +319,124 @@ export default function Layout({ children }) {
           </div>
         </div>
       </footer>
+
+      {/* Feedback Modal */}
+      {showFeedback && createPortal(
+        <div
+          onClick={() => setShowFeedback(false)}
+          style={{
+            position: "fixed", inset: 0, zIndex: 99999,
+            background: "rgba(0,0,0,0.75)", backdropFilter: "blur(6px)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            padding: "1rem",
+          }}
+        >
+          <div
+            onClick={e => e.stopPropagation()}
+            style={{
+              width: "100%", maxWidth: "520px",
+              background: "linear-gradient(145deg, #1a0d06, #0e0804)",
+              border: "1px solid rgba(255,100,30,0.3)",
+              borderRadius: "20px",
+              boxShadow: "0 40px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.04)",
+              padding: "2.5rem",
+            }}
+          >
+            {/* Header */}
+            <div className="d-flex justify-content-between align-items-start mb-4">
+              <div>
+                <p className="text-warning fw-bold small text-uppercase mb-1" style={{ letterSpacing: "0.15em" }}>
+                  ★ Spune-ne cum te simți
+                </p>
+                <h2 className="text-white fw-bolder mb-0 h4">Feedback pentru Far Beyond Gear</h2>
+              </div>
+              <button
+                onClick={() => setShowFeedback(false)}
+                style={{ background: "none", border: "none", color: "rgba(255,255,255,0.4)", fontSize: "1.5rem", cursor: "pointer", lineHeight: 1 }}
+              >
+                <i className="bi bi-x-lg"></i>
+              </button>
+            </div>
+
+            <form onSubmit={handleFeedbackSubmit}>
+              {/* Star rating */}
+              <div className="mb-4">
+                <label className="form-label text-muted small text-uppercase fw-bold mb-2" style={{ letterSpacing: "0.1em" }}>
+                  Experiența ta generală
+                </label>
+                <div className="d-flex gap-1">
+                  {[1, 2, 3, 4, 5].map(star => (
+                    <button
+                      key={star}
+                      type="button"
+                      onClick={() => setFbRating(star)}
+                      onMouseEnter={() => setFbHover(star)}
+                      onMouseLeave={() => setFbHover(0)}
+                      style={{
+                        background: "none", border: "none", cursor: "pointer",
+                        fontSize: "2rem", lineHeight: 1, padding: "0 2px",
+                        color: star <= (fbHover || fbRating) ? "#ffb347" : "rgba(255,255,255,0.15)",
+                        transition: "color 0.15s, transform 0.15s",
+                        transform: star <= (fbHover || fbRating) ? "scale(1.15)" : "scale(1)",
+                      }}
+                    >
+                      ★
+                    </button>
+                  ))}
+                  <span className="ms-2 align-self-center text-muted small">
+                    {["", "Dezamăgitor", "Slab", "OK", "Bun", "Excelent!"][fbHover || fbRating]}
+                  </span>
+                </div>
+              </div>
+
+              {/* Name */}
+              <div className="mb-3">
+                <label className="form-label text-muted small text-uppercase fw-bold" style={{ letterSpacing: "0.1em" }}>
+                  Numele tău (opțional)
+                </label>
+                <input
+                  type="text"
+                  className="form-control border-0 text-white"
+                  placeholder="Ex: Mihai"
+                  value={fbName}
+                  onChange={e => setFbName(e.target.value)}
+                  style={{ background: "rgba(255,255,255,0.05)", borderRadius: "10px", padding: "12px 16px" }}
+                />
+              </div>
+
+              {/* Message */}
+              <div className="mb-4">
+                <label className="form-label text-muted small text-uppercase fw-bold" style={{ letterSpacing: "0.1em" }}>
+                  Mesajul tău <span className="text-danger">*</span>
+                </label>
+                <textarea
+                  className="form-control border-0 text-white"
+                  rows="4"
+                  placeholder="Ce îți place? Ce am putea îmbunătăți?"
+                  value={fbMessage}
+                  onChange={e => setFbMessage(e.target.value)}
+                  required
+                  style={{ background: "rgba(255,255,255,0.05)", borderRadius: "10px", padding: "12px 16px", resize: "none" }}
+                />
+              </div>
+
+              {/* Submit */}
+              <button
+                type="submit"
+                className="btn btn-primary w-100 fw-bold py-3 rounded-pill"
+                disabled={fbSending}
+                style={{ fontSize: "1rem", letterSpacing: "0.05em" }}
+              >
+                {fbSending
+                  ? <><span className="spinner-border spinner-border-sm me-2"></span>Se trimite...</>
+                  : <><i className="bi bi-send-fill me-2"></i>Trimite Feedback</>
+                }
+              </button>
+            </form>
+          </div>
+        </div>,
+        document.body
+      )}
     </div>
   );
 }

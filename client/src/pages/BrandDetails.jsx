@@ -116,7 +116,7 @@ export default function BrandDetails() {
                     </div>
                     <div className="row g-4 glow-container">
                         {artists.length === 0 ? (
-                            <div className="col-12 text-muted">Nu există artiști definiți pentru acest brand. Adaugă din Admin.</div>
+                            <div className="col-12 text-muted">Nu există artiști reprezentanți pentru acest brand.</div>
                         ) : (
                             artists.map((a) => (
                                 <div className="col-12 col-sm-6 col-lg-4" key={a.id}>
