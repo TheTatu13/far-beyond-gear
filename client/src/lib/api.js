@@ -44,7 +44,7 @@ export async function getProduct(id) {
 }
 
 export async function getArtists(params = {}) {
-  const res = await api.get("/artists/", { params });
+  const res = await api.get("/artists/", { params: { page_size: 100, ...params } });
   return unwrapList(res);
 }
 
