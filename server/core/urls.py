@@ -68,7 +68,6 @@ urlpatterns = [
     path('api/admin/orders/<int:pk>/status/', AdminOrderStatusView.as_view(), name='admin-order-status'),
 ]
 
-if settings.DEBUG:
-    urlpatterns += [
+urlpatterns += [
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 ]
