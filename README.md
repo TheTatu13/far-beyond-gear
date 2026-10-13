@@ -496,6 +496,31 @@ python manage.py test catalog --verbosity=2
 | `test_products_endpoint` | `GET /api/products/` returnează 200 OK |
 | `test_brands_endpoint` | `GET /api/brands/` returnează 200 OK |
 
+### Teste end-to-end (Playwright)
+
+Testele E2E rulează într-un browser real (Chromium) pe frontend-ul pornit local și folosesc Page Object Model (`tests/e2e/pages/ProductsPage.js`).
+
+```bash
+# 1. Pornește aplicația (frontend :5173, backend :8000)
+start_all.bat
+
+# 2. Rulează testele
+npx playwright test
+
+# 3. Deschide raportul HTML
+npx playwright show-report
+```
+
+| Fișier | Comportament verificat |
+|---|---|
+| `cos.spec.js` | Adăugarea unui produs actualizează contorul coșului; produsul epuizat nu poate fi adăugat |
+| `cart-flow.spec.js` | Două produse actualizează contorul la (2); produsul apare în pagina coșului |
+| `cautare.spec.js` | Căutarea filtrează lista de produse |
+| `products.spec.js` | Filtrul de preț respectă intervalul; căutarea fără rezultate; resetarea filtrelor |
+| `product-detail.spec.js` | Pagina produsului afișează numele din catalog |
+
+Notă: testele folosesc datele din baza locală (de exemplu produsele *BC Rich Warlock Bass* și *Mockingbird Extreme*, acesta din urmă epuizat). `shop.spec.js` conține teste vechi, scrise pentru versiunea cu pagini HTML statice, și este marcat ca ignorat (`skip`).
+
 ---
 
 ## 12. Instalare și Configurare
